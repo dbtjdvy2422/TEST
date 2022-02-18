@@ -121,7 +121,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <!-- javax.servlet-api : 3.0 이상 유지
             https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
@@ -224,6 +223,7 @@
             <version>1.16</version>
         </dependency>
 
+
         <!-- 콘솔에 쿼리출력하기 - pom.xml
         https://blog.naver.com/rladlskdlsk/222330268194
          <dependency>
@@ -241,6 +241,7 @@
               <artifactId>log4jdbc-remix</artifactId>
               <version>0.2.7</version>
             </dependency>-->
+
 
         <!--   JSON 데이터 만들기   -->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
