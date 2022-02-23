@@ -16,6 +16,9 @@
         <beans:property name="prefix" value="/WEB-INF/views/" />
         <beans:property name="suffix" value=".jsp" />
     </beans:bean>
+
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </beans:bean>
     <context:component-scan base-package="org.example.controller" /><!--base package명 수정-->
     <context:component-scan base-package="org.example.exception" />
 </beans:beans>
