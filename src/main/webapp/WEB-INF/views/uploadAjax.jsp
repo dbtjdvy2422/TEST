@@ -23,6 +23,18 @@
 
 <script>
     $(document).ready(function(){
+
+        var regex= new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+        var maxSize =5242880; // 5MB
+
+        function checkExtension(fileName, filesize){
+            if(filesize>= maxSize) {
+                alert("파일 사이즈 초과");
+                return false;
+            }
+            return true;
+        }
+
         $("#uploadBtn").on("click", function(e){
             var formData = new FormData();
             var inputFile =$("input[name='uploadFile']");
@@ -39,12 +51,14 @@
                 contentType: false,
                 data: formData,
                 type:'post',
+                dataType: 'json',
                 success: function(result){
-                    alert("uploaded");
+                   console.log(result);
                 }
             });
 
         });
+
     });
 </script>
 
