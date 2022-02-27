@@ -22,8 +22,8 @@ public class BoardMapperTests {
     private  BoardMapper mapper;
 
     @Test
-    public void testGetList(){
-         mapper.getList().forEach(board -> log.info(board) );
+    public void testGetList() {
+        mapper.getList(new Criteria()).forEach(board -> log.info(board));
     }
 
     @Test

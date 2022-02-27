@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.domain.BoardAttachVO;
 import org.example.domain.BoardVO;
 import org.example.domain.Criteria;
 
@@ -15,7 +16,12 @@ public interface BoardService {
 
     public boolean remove(Long bno);
 
+    // public List<BoardVO> getList();
+
     public List<BoardVO> getList(Criteria cri);
 
-    int getTotal(Criteria cri);
+    public int getTotal(Criteria cri);
+
+    public List<BoardAttachVO> getAttachList(Long bno);
+
 }

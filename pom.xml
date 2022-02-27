@@ -28,18 +28,18 @@
 
     <dependencies>
 
-    <!--  스프링 컨텍스트리스너 쓴다, 스프링으로 웹프로젝트 만들꺼다 : web.xml  -->
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>${org.springframework-version}</version>
-        <exclusions>
-            <exclusion>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-            </exclusion>
-        </exclusions>
-    </dependency>
+        <!--  스프링 컨텍스트리스너 쓴다, 스프링으로 웹프로젝트 만들꺼다 : web.xml  -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!--  web.xml만들어줌  -->
         <dependency>
@@ -64,7 +64,6 @@
 
         <!--  AOP 기능을 위한 dependency
           AspectJ : Java AOP 소프트웨어의 사실상의 표준이라고 해도 될 정도로 널리 사용되고 있는 소프트웨어
-
           aspectjrt : AspectJ 런타임프로그램 -> 이걸 추가해야 AspectJ의 기능을 사용할 수 있다.
           aspectjweaver : aspect의 정보를 바탕으로 aspect를 구성한 코드를 생성하는데 필요한 유틸리티 프로그램
                     ( spring-aop는 따로임 주의, 하지만 이 두가지가 추가되어있어야 spring-aop도 사용가능 )
@@ -133,7 +132,6 @@
         <!--   파일업로드
            [1] Servlet3.0 이전 : commons-fileupload 라이브러리 또는 cos.jar이용
            [2] Servlet3.0 이후(Tomcat7.0) : 기본적으로 업로드되는 파일을 처리할 수 있는 기능이 추가됨
-
             ==> 현제 서블릿 3.0(톰캣9.0) 이상이기때문에 라이브러리 추가 없이 되는지 테스트 : 500에러,
                 500에러 ( Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: org/apache/commons/io/IOUtils )
             ==> 결국 서블릿 3.0이상이어도 commons-fileupload 는 필요한듯, 이거 있으면 됨.
@@ -241,6 +239,42 @@
               <artifactId>log4jdbc-remix</artifactId>
               <version>0.2.7</version>
             </dependency>-->
+
+
+        <!-- Quartz 라이브러리
+             https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs
+        -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <!-- Spring Security 관련 start -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
 
         <dependency>
             <groupId>net.coobird</groupId>

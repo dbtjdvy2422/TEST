@@ -9,7 +9,7 @@ import java.util.List;
 public interface BoardMapper {
 
     //@Select("select * from tbl_board where bno > 0")
-    public List<BoardVO> getList();
+    public List<BoardVO> getList(Criteria cri);
 
     public List<BoardVO> getListWithPaging(Criteria cri);
 
@@ -21,7 +21,7 @@ public interface BoardMapper {
 
     public int delete(Long bno);
 
-    public int update (BoardVO board);
+    public int update(BoardVO board);
 
     public int getTotalCount(Criteria cri);
 }
