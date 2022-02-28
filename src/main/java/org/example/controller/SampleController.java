@@ -86,4 +86,9 @@ public class SampleController {
 
         return  new ResponseEntity<>(msg, headers, HttpStatus.OK);
     }
+
+    @GetMapping("/admin")
+    public void doAdmin() {
+        log.info("admin only");
+    }
 }

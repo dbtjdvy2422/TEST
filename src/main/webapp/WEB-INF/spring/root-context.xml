@@ -3,9 +3,17 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/cache"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://mybatis.org/schema/mybatis-spring
+    https://mybatis.org/schema/mybatis-spring.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <!-- <property name="driverClassName"
@@ -40,4 +48,7 @@
     <context:component-scan base-package="org.example.service"></context:component-scan>
     <context:component-scan base-package="org.example.aop"></context:component-scan>
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <context:component-scan base-package="org.example.task"></context:component-scan>
+    <task:annotation-driven/>
+
 </beans>
