@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>test</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-BUILD-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>test</name>
@@ -14,72 +14,118 @@
     <url>http://www.example.com</url>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <!--  추가한내용
-   자바버전, 스프링버전, AOP를위한 aspectj버전, 로그용slf4j버전-->
         <java-version>1.8</java-version>
         <org.springframework-version>5.0.7.RELEASE</org.springframework-version>
-        <org.aspectj-version>1.6.10</org.aspectj-version>
-        <org.slf4j-version>1.6.6</org.slf4j-version>
-        <!--  추가한내용 끝 -->
-
+        <org.aspectj-version>1.9.0</org.aspectj-version>
+        <org.slf4j-version>1.7.25</org.slf4j-version>
     </properties>
-
     <dependencies>
 
-        <!--  스프링 컨텍스트리스너 쓴다, 스프링으로 웹프로젝트 만들꺼다 : web.xml  -->
+        <!-- 객체를 JSON/XML로 변환할 떄 사용 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.9.6</version>
+        </dependency>
+
+        <!-- 직접 Java 인스턴스를 JSON 타입의 문자열로 변환해야 하는 일들도 있으므로 gson 라이브러리 추가 -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+
+        <!-- Thumbnailator -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.8</version>
+        </dependency>
+
+        <!-- Quartz 라이브러리
+             https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
+        -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <!-- Quartz 라이브러리
+             https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs
+        -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <!-- Spring Security 관련 start -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
+
+        <!-- Spring Security 관련 end -->
+
+
+
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework-version}</version>
             <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
                 <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!--  web.xml만들어줌  -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
 
-        <!--  마이바티스 연동시 추가, transaction관리  -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>
-
-        <!--  jdbc  -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>
-
-        <!--  AOP 기능을 위한 dependency
-          AspectJ : Java AOP 소프트웨어의 사실상의 표준이라고 해도 될 정도로 널리 사용되고 있는 소프트웨어
-          aspectjrt : AspectJ 런타임프로그램 -> 이걸 추가해야 AspectJ의 기능을 사용할 수 있다.
-          aspectjweaver : aspect의 정보를 바탕으로 aspect를 구성한 코드를 생성하는데 필요한 유틸리티 프로그램
-                    ( spring-aop는 따로임 주의, 하지만 이 두가지가 추가되어있어야 spring-aop도 사용가능 )
-        -->
+        <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>${org.aspectj-version}</version>
         </dependency>
+
+        <!-- 스프링에서 AOP 처리가 된 객체를 생성할 때 AspectJ Weaver 라이브러리의 도움을 받아서 동작한다. -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.8.6</version>
+            <version>${org.aspectj-version}</version>
         </dependency>
-
-
 
         <!-- log용 -->
         <dependency>
@@ -122,68 +168,48 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- javax.servlet-api : 3.0 이상 유지
-            https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+
+        <!-- @Inject -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+
+        <!-- Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-
-
-
-        <!--   파일업로드
-           [1] Servlet3.0 이전 : commons-fileupload 라이브러리 또는 cos.jar이용
-           [2] Servlet3.0 이후(Tomcat7.0) : 기본적으로 업로드되는 파일을 처리할 수 있는 기능이 추가됨
-            ==> 현제 서블릿 3.0(톰캣9.0) 이상이기때문에 라이브러리 추가 없이 되는지 테스트 : 500에러,
-                500에러 ( Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: org/apache/commons/io/IOUtils )
-            ==> 결국 서블릿 3.0이상이어도 commons-fileupload 는 필요한듯, 이거 있으면 됨.
-            -->
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.3.3</version>
-        </dependency>
-
-        <!--   500에러
-         ( Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: org/apache/commons/io/IOUtils )
-                그래서 commons-io추가하고 테스트 OK
-        -->
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-        <!--      <dependency>-->
-        <!--          <groupId>commons-io</groupId>-->
-        <!--          <artifactId>commons-io</artifactId>-->
-        <!--          <version>2.6</version>-->
-        <!--      </dependency>-->
-
-        <!-- jsp내장객체 사용하기 위함 -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.1</version>
             <scope>provided</scope>
-        </dependency> <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>jstl</artifactId>
-        <version>1.2</version>
-    </dependency>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
 
-        <!--  테스트
-          Junit : 4.12이상유지 / spring-test  -->
+
+
+        <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-test</artifactId>
-        <version>${org.springframework-version}</version>
-    </dependency>
 
-        <!--  Lombok   -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -191,138 +217,87 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Hikari커넥션풀
-        https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <!-- Connection Pools -->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>3.3.1</version>
+            <version>2.7.4</version>
         </dependency>
 
-        <!-- 마이바티스 : persistence framework -> DB작업 하는 프레임워크
-        1. Connection 자동 close() : 메모리 관리, 네트워크 비용 관리
-        2. 내부적으로 SqlSessionFactory 객체 생성하여 SQL Session만들어서 처리
-        3. PreparedStatement, ResultSet 객체 생성 및 관리 - #{바인딩변수}로 작성만하면됨
-        4. SQL코드를 그대로 사용해서 편리
-        5. JDBC관련 코드작업 줄일 수 있음
-        -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.2</version>
+            <version>3.4.6</version>
         </dependency>
 
-        <!-- spring과 mybatis를 연결 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>2.0.2</version>
+            <version>1.3.2</version>
         </dependency>
 
-        <!--  콘솔에 쿼리 Log출력  -->
         <dependency>
             <groupId>org.bgee.log4jdbc-log4j2</groupId>
             <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
             <version>1.16</version>
         </dependency>
 
-
-        <!-- 콘솔에 쿼리출력하기 - pom.xml
-        https://blog.naver.com/rladlskdlsk/222330268194
-         <dependency>
-              <groupId>org.apache.logging.log4j</groupId>
-              <artifactId>log4j-api</artifactId>
-              <version>2.0.1</version>
-            </dependency>
-            <dependency>
-              <groupId>org.apache.logging.log4j</groupId>
-              <artifactId>log4j-core</artifactId>
-              <version>2.0.1</version>
-            </dependency>
-            <dependency>
-              <groupId>org.lazyluke</groupId>
-              <artifactId>log4jdbc-remix</artifactId>
-              <version>0.2.7</version>
-            </dependency>-->
-
-
-        <!-- Quartz 라이브러리
-             https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs
-        -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz-jobs</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-
-        <!-- Spring Security 관련 start -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>5.0.6.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>5.0.6.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.0.6.RELEASE</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>5.0.7.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.coobird</groupId>
-            <artifactId>thumbnailator</artifactId>
-            <version>0.4.8</version>
-        </dependency>
-
-        <!--   JSON 데이터 만들기   -->
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-xml</artifactId>
-            <version>2.9.5</version>
-        </dependency>
     </dependencies>
-    <!--
-    pom.xml에 자바 버전 명시하는 곳이 2군데있다.
-    [1] 맨위에 프로젝트 기본속성 정의하는 <properties> 안에서 <java-version>
-    [2] Maven 프로젝트 <build>를 위한 maven-compiler-plugin 추가하는 곳의
-          <source>1.8</source>
--->
-
     <build>
-
         <plugins>
+            <plugin>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <additionalProjectnatures>
+                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                    </additionalProjectnatures>
+                    <additionalBuildcommands>
+                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>2.5.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <mainClass>org.test.int1.Main</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
 </project>

@@ -66,7 +66,7 @@
     }
 
 </style>
-
+<body>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Board Register</h1>
@@ -202,6 +202,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+</body>
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 
 
@@ -286,52 +287,7 @@
         console.log("JS TEST");
         var bnoValue = '<c:out value="${board.bno}" />';
 
-        // for replyService add test
-        /* replyService.add(
-            {
-                reply: "JS Test",
-                replyer : "tester",
-                bno : bnoValue
-            },
-            function(result) {
-                alert("RESULT: " + result);
-            }
-        ); */
 
-        // for replyService List test
-        /* replyService.getList(
-            {
-                bno : bnoValue,
-                page : 1
-            },
-            function(list) {
-                for (var i = 0, len = list.length || 0; i < len; i++) {
-                    console.log(list[i]);
-                }
-            }
-        ); */
-
-        // for replyService delete test
-        /* replyService.remove(94, function(count) {
-            console.log(count);
-            if (count == "success") {
-                alert("REMOVE");
-            }
-        }, function(err) {
-            alert("ERROR....");
-        }); */
-
-        // for replyService update test
-        /* replyService.update(
-                {
-                    rno : 10,
-                    bno : bnoValue,
-                    reply : "Modified Reply test zzz"
-                },
-                function(result) {
-                    alert("수정 완료");
-                }
-        ); */
 
         replyService.get(10, function(data) {
             console.log(data);
@@ -471,19 +427,6 @@
             });
         });
 
-        /* modalModBtn.on("click", function(e) {
-            alert("modalInputReply: " + modalInputReplyer.val());
-            var reply = {
-                rno : modal.data("rno"),
-                reply : modalInputReply.val()
-            };
-
-            replyService.update(reply, function(result) {
-                alert(result);
-                modal.modal("hide");
-                showList(1);
-            });
-        }); */
 
         modalRemoveBtn.on("click", function(e) {
             var rno = modal.data("rno");

@@ -50,5 +50,6 @@
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
     <context:component-scan base-package="org.example.task"></context:component-scan>
     <task:annotation-driven/>
+    <tx:annotation-driven/>
 
 </beans>
